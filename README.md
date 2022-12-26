@@ -1,6 +1,7 @@
-# Pok�types
+# Pokétypes
 
-Pok�types is a webapp to help you find the strengths and weaknesses of the different Pokémon type.
+Pokétypes is a webapp to help you find the strengths and weaknesses of the different Pokémon type.
+
 It does not handle dual types yet, but these are just multiplicative.
 
 # To use
