@@ -1,0 +1,29 @@
+<html>
+	<h1>
+        {{ .name }} <a href="/{{ .name }}"><img src=./img/{{ .name }}.png /></a>  
+	</h1>
+    {{ if .vulnerable }}
+    <h2>Is Vulnerable to</h2>
+    {{ range $vuln := .vulnerable }} <a href="/{{ $vuln }}"><img src=./img/{{ $vuln }}.png {{ if or (sliceContains $.notEffective $vuln) (sliceContains $.ineffective $vuln) }}style="border: 4px solid #00a907; border-radius: 30px;"{{end}} /></a> {{ end }}
+    {{end}}
+    {{ if .notEffective }}
+    <h2>Is NOT Effective against</h2>
+    {{ range .notEffective }} <a href="/{{ . }}"><img src=./img/{{ . }}.png /></a> {{ end }}
+    {{end}}
+    {{ if .veryEffective }}
+    <h2>Is Very Effective against</h2>
+    {{ range .veryEffective }} <a href="/{{ . }}"><img src=./img/{{ . }}.png /></a> {{ end }}
+    {{end}}
+    {{ if .ineffective }}
+    <h2>Completely ineffective against</h2>
+    {{ range .ineffective }} <a href="/{{ . }}"><img src=./img/{{ . }}.png /></a> {{ end }}
+    {{end}}
+    {{ if .resistant }}
+    <h2>Is Resistant to</h2>
+    {{ range .resistant }} <a href="/{{ . }}"><img src=./img/{{ . }}.png /></a> {{ end }}
+    {{end}}
+    {{ if .invulnerable }}
+    <h2>Completely invulnerable against</h2>
+    {{ range .invulnerable }} <a href="/{{ . }}"><img src=./img/{{ . }}.png /></a> {{ end }}
+    {{end}}
+</html>

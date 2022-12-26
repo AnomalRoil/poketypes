@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  poketype:
+    image: docker-poketype:latest
+    restart: unless-stopped
+    ports:
+      - 8088:8088
+    expose:
+      - 8088
