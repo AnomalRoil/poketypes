@@ -159,6 +159,7 @@ func VeryEffective(t int) []string {
 
 type PokeType struct {
 	Name string `uri:"name" binding:"required"`
+	Lang string `uri:"lang" binding:"required"`
 }
 
 func GetTypes() []string {
@@ -171,27 +172,44 @@ func GetTypes() []string {
 
 func main() {
 	route := gin.Default()
+	route.SetTrustedProxies(nil)
 	route.SetFuncMap(template.FuncMap{
 		"sliceContains": slices.Contains[string],
 	})
-	route.LoadHTMLFiles("./home.tmpl","./entry.tmpl")
+	route.LoadHTMLFiles("./home.tmpl", "./entry.tmpl")
 	route.Static("/img", "./types")
 	route.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "home.tmpl", gin.H{
-				"valid":    GetTypes(),
-			})
+		c.Redirect(http.StatusFound, "/en")
 	})
-	route.GET("/:name", func(c *gin.Context) {
+	route.GET("/fr", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "home.tmpl", gin.H{
+			"valid": GetTypes(),
+			"lang":  "fr",
+		})
+	})
+	route.GET("/en", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "home.tmpl", gin.H{
+			"valid": GetTypes(),
+			"lang":  "en",
+		})
+	})
+	route.GET("/:lang/:name", func(c *gin.Context) {
 		var t PokeType
 		if err := c.ShouldBindUri(&t); err != nil {
 			c.JSON(400, gin.H{"msg": err})
 			return
 		}
-		if v, ok := fromName[t.Name]; !ok {
-			c.JSON(400, gin.H{"valid": typeName})
+		if v, ok := fromName[t.Name]; !ok || (t.Lang != "en" && t.Lang != "fr") {
+			c.JSON(400, gin.H{
+				"valid_types":    typeName,
+				"valid_language": []string{"en", "fr"},
+				"got_lang":       t.Lang,
+				"got_type":       t.Name,
+			})
 			return
 		} else {
 			c.HTML(http.StatusOK, "entry.tmpl", gin.H{
+				"lang":          t.Lang,
 				"name":          t.Name,
 				"veryEffective": VeryEffective(v),
 				"notEffective":  NotEffective(v),

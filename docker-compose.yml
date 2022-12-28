@@ -1,10 +1,37 @@
 version: '3.7'
 
+volumes:
+  caddy_data: {}
+
+
+networks:
+  caddy:
+
 services:
   poketype:
-    image: docker-poketype:latest
+    image: docker-poketypes:latest
     restart: unless-stopped
-    ports:
-      - 8088:8088
     expose:
       - 8088
+    networks:
+      - caddy
+    environment:
+      - GIN_MODE=release
+    labels:
+      caddy: http://poke.wouaib.ch
+      caddy.reverse_proxy: "{{upstreams 8088}}"
+      # caddy.log.level: DEBUG
+
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+    environment:
+      - CADDY_INGRESS_NETWORKS=caddy
+    networks:
+      - caddy
+    restart: unless-stopped

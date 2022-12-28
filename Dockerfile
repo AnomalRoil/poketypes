@@ -5,9 +5,9 @@ WORKDIR /app
 COPY main.go ./
 COPY *.tmpl ./
 COPY types ./types
-RUN go mod init poketype
+RUN go mod init poketypes
 RUN go mod tidy
 RUN go mod download
-RUN go build -o ./docker-poketype
+RUN go build -o ./docker-poketypes
 EXPOSE 8088
-CMD [ "/app//docker-poketype" ]
+CMD [ "/app/docker-poketypes" ]
