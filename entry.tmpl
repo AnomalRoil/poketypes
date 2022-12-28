@@ -10,59 +10,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAD/AAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP/ExMT/xMTE/8TExP/ExMT/AAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////////////////////////xMTE/8TExP/ExMT/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////////////////8AAAD/AAAA/8TExP/ExMT/xMTE/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////AAAA/wAAAP8AAAD/xMTE/8TExP8AAAD/AAAA/wAAAP/ExMT/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAA//8AAP//AAAA///////ExMT/AAAA/ysrvf8rK73/AAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAA/wAA//8AAP//AAD//wAA//8AAAD/AAAA/ysrvf8rK73/Kyu9/ysrvf8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAP8AAP//AAD//wAA//8AAP+uAAD//wAA//8AAP//Kyu9/ysrvf8rK73/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAA//8AAP+u/////wAA/64AAP//AAD//ysrvf8rK73/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAP//AAD//wAA/64AAP//Kyu9/ysrvf8rK73/Kyu9/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAP//Kyu9/ysrvf8rK73/AAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD8PwAA8A8AAOAHAADgBwAAwAMAAMADAADAAwAAwAMAAOAHAADgBwAA8A8AAPw/AAD//wAA//8AAA==" rel="icon" type="image/x-icon" />
 </head>
-	<h1>
-        <a href="/"><img src=/img/{{ .lang }}/{{ .name }}.png style="margin-bottom:-0.25em;" /></a>&emsp;<a href="/">⌂</a>
-	</h1>
+	<h1><a href="/"><img src=/img/{{ .lang }}/{{ .name }}.png style="margin-bottom:-0.25em;" /></a>&emsp;<a href="/">⌂</a></h1>
     {{ if .vulnerable }}
     {{ if eq .lang "fr" }}
-<h2>Vulnérable à (x2)</h2>
+<h3>Vulnérable à (x2)</h2>
 {{ else }}
-<h2>Is Vulnerable to (x2)</h2>
+<h3>Is Vulnerable to (x2)</h2>
 {{ end }}
     {{ range $vuln := .vulnerable }} <a href="/{{ $.lang }}/{{ $vuln }}"><img src=/img/{{ $.lang }}/{{ $vuln }}.png style="{{ if or (sliceContains $.notEffective $vuln) (sliceContains $.ineffective $vuln) }}border: 4px solid #6ee073; border-radius: 30px; margin:0px;{{ else }}margin: 4px;{{end}}" /></a> {{ end }}
     {{end}}
     {{ if .notEffective }}
     {{ if eq .lang "fr" }}
-<h2>Pas très efficace contre (x0.5)</h2>
+<h3>Pas très efficace contre (x0.5)</h2>
 {{ else }}
-<h2>Is NOT Effective against (x0.5)</h2>
+<h3>Is NOT Effective against (x0.5)</h2>
 {{ end }}
     {{ range .notEffective }} <a href="/{{ $.lang }}/{{ . }}"><img src=/img/{{ $.lang }}/{{ . }}.png /></a> {{ end }}
     {{end}}
     {{ if .veryEffective }}
     {{ if eq .lang "fr" }}
-<h2>Très efficace contre (x2)</h2>
+<h3>Très efficace contre (x2)</h2>
 {{ else }}
-<h2>Is Very Effective against (x2)</h2>
+<h3>Is Very Effective against (x2)</h2>
 {{ end }}
     {{ range .veryEffective }} <a href="/{{ $.lang }}/{{ . }}"><img src=/img/{{ $.lang }}/{{ . }}.png /></a> {{ end }}
     {{end}}
     {{ if .ineffective }}
     {{ if eq .lang "fr" }}
-<h2>Inefficace contre (x0)</h2>
+<h3>Inefficace contre (x0)</h2>
 {{ else }}
-<h2>Completely ineffective against (x0)</h2>
+<h3>Completely ineffective against (x0)</h2>
 {{ end }}
     {{ range .ineffective }} <a href="/{{ $.lang }}/{{ . }}"><img src=/img/{{ $.lang }}/{{ . }}.png /></a> {{ end }}
     {{end}}
     {{ if .resistant }}
     {{ if eq .lang "fr" }}
-<h2>Résistant à (x0.5)</h2>
+<h3>Résistant à (x0.5)</h2>
 {{ else }}
-<h2>Is Resistant to (x0.5)</h2>
+<h3>Is Resistant to (x0.5)</h2>
 {{ end }}
     {{ range .resistant }} <a href="/{{ $.lang }}/{{ . }}"><img src=/img/{{ $.lang }}/{{ . }}.png /></a> {{ end }}
     {{end}}
     {{ if .invulnerable }}
     {{ if eq .lang "fr" }}
-<h2>Invulnérable à (x0)</h2>
+<h3>Invulnérable à (x0)</h2>
 {{ else }}
-<h2>Completely invulnerable to (x0)</h2>
+<h3>Completely invulnerable to (x0)</h2>
 {{ end }}
     {{ range .invulnerable }} <a href="/{{ $.lang }}/{{ . }}"><img src=/img/{{ $.lang }}/{{ . }}.png /></a> {{ end }}
     {{end}}
     <br />
     <h1><a style="right: 10; position: fixed; bottom: 10;" href="/">⌂</a></h1>
+<h5>Pokétypes <a href=/fr/{{ .name }}>&#127467;&#127479;</a> <a href="/en/{{ .name }}">&#127468;&#127463;</a></h5>
     <small>
     {{ if eq .lang "fr" }}
         Images venant de <a href="https://www.pokepedia.fr/">Poképedia</a> sous <a href="https://www.pokepedia.fr/Pok%C3%A9p%C3%A9dia:Copyrights">CC BY-NC-SA 3.0</a>.
