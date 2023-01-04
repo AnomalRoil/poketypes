@@ -8,7 +8,6 @@ It does not handle dual types yet, but these are just multiplicative.
 ``` 
 git clone git@github.com:AnomalRoil/poketypes.git
 cd poketypes
-docker build --tag docker-poketype .
 docker compose up -d
 ```
 And it should now be exposed on http://127.0.0.1:8088/

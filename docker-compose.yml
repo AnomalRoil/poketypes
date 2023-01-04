@@ -10,7 +10,10 @@ networks:
 
 services:
   poketype:
-    image: docker-poketypes:latest
+    container_name: docker-poketypes
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     expose:
       - 8088
